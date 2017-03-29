@@ -1,7 +1,6 @@
 User Stories:
 
-- as a new user, I want to be able to create an account so that I can login
-- as a user, I want to login / authenticate so that the app is personalized
+- as a user, I want to login / authenticate with Google so that the app is personalized
 - as an unauthenticated user, I want to be able to view a map
 - as an unauthenticated user, I want to be able to view a list of maps
 - as an unauthenticated user viewing a map, I want to be able to see all the points on the map
@@ -23,7 +22,6 @@ User Stories:
 - as an authenticated user viewing my map, I want to be able to view a point's details (title, description, image)
 - as an authenticated user viewing my map, I want to be able to see all my points on the map
 - as an authenticated user, I want to be able to view my profile
-- as an authenticated user, I want to be able to modify my profile
-- as an authenticated user, I want to be able to delete my profile
+
 
 
