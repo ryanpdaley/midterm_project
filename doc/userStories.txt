@@ -1,0 +1,26 @@
+User Stories:
+
+- as a new user, I want to be able to create an account so that I can login
+- as a user, I want to login so that the app is personalized
+- as a logged in user, I want to be able to logout
+- as a logged in user, I want to be able to create a map
+- as a logged in user, I want to be able to modify a map
+- as a logged in user, I want to be able to delete a map
+- as a logged in user, I want to be able to view a map
+- as a logged in user, I want to be able to create a list of maps
+- as a logged in user, I want to be able to modify a list of maps
+- as a logged in user, I want to be able to delete a list of maps
+- as a logged in user, I want to be able to view a list of maps (all ?)
+- as a logged in user, I want to be able to view a list of my maps
+- as a logged in user viewing my map, I want to be able to add a point to the map (title, description, image)
+- as a logged in user viewing my map, I want to be able to modify a point on the map (title, description, image)
+- as a logged in user viewing my map, I want to be able to delete a point on the map (title, description, image)
+- as a logged in user viewing my map, I want to be able to see all my points on the map
+
+
+
+- as a logged in user viewing a map, I want to be able to see all my points on the map
+- as a logged in user viewing a map, I want to be able to see the title for each point on the map
+- as a logged in user viewing a map, I want to be able to see the discription for each point on the map
+- as a logged in user viewing a map, I want to be able to see the image for each point on the map
+
