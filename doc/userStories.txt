@@ -1,0 +1,27 @@
+User Stories:
+
+- as a user, I want to login / authenticate with Google so that the app is personalized
+- as an unauthenticated user, I want to be able to view a map
+- as an unauthenticated user, I want to be able to view a list of maps
+- as an unauthenticated user viewing a map, I want to be able to see all the points on the map
+- as an unauthenticated user viewing a map, I want to be able to view a point's details (title, description, image)
+- as an authenticated user, I want to be able to logout
+- as an authenticated user, I want to be able to create a map
+- as an authenticated user, I want to be able to modify a map
+- as an authenticated user, I want to be able to delete a map
+- as an authenticated user, I want to be able to view a map
+- as an authenticated user, I want to be able to create a list of maps
+- as an authenticated user, I want to be able to modify a list of maps
+- as an authenticated user, I want to be able to delete a list of maps
+- as an authenticated user, I want to be able to view a list of maps
+- as an authenticated user, I want to be able to view a list of my maps
+- as an authenticated user, I want to be able to favourite a list of my maps
+- as an authenticated user viewing my map, I want to be able to add a point to the map (title, description, image)
+- as an authenticated user viewing my map, I want to be able to modify a point on the map (title, description, image)
+- as an authenticated user viewing my map, I want to be able to delete a point on the map (title, description, image)
+- as an authenticated user viewing my map, I want to be able to view a point's details (title, description, image)
+- as an authenticated user viewing my map, I want to be able to see all my points on the map
+- as an authenticated user, I want to be able to view my profile
+
+
+
