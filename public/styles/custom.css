@@ -50,6 +50,34 @@ body {
   z-index: 2;
 }
 
+.overlay {
+  display: inline-block;
+  float: left;
+  width: 60%;
+  word-wrap: break-word;
+  font-family: 'Lato', sans-serif;
+  border-style: solid;
+  /*margin: 18px 20px;*/
+  padding: 20px;
+  border-radius: 7px;
+  background-color: #ffffff;
+  opacity: 0.9;
+  z-index: 2;
+}
+
+.right {
+  display: inline-block;
+  float: right;
+  width: 200px;
+  word-wrap: break-word;
+  font-family: 'Lato', sans-serif;
+  z-index: 2;
+}
+
+.onAuth {
+  display: none;
+}
+
 .inline {
   display: inline;
 }

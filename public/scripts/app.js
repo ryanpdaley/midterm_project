@@ -1,3 +1,5 @@
+let authenticated = false;
+
 function initMap() {
 
   var location = new google.maps.LatLng(43.64443, -79.39483);
@@ -37,13 +39,27 @@ function initMap() {
   });
 }
 
-
+function show_addList() {
+  $("#overlay").show();
+  return false;
+}
 
 $( document ).ready(function() {
+
   initMap()
-  $( ".sign_in" ).hover(function() {
-    $(this).css("opacity", "1");
-  }, function() {
-    $(this).css("opacity", "0.5");
-  });
+  $("#overlay").hide()
+  if (authenticated){
+    $(this).find( ".sign_in" ).hide();
+    $(this).find( ".onAuth" ).show();
+    $("addList").click(function(event) {
+      event.preventDefault();
+      $("#overlay").show();
+    });
+  } else {
+    $( ".sign_in" ).hover(function() {
+      $(this).css("opacity", "1");
+    }, function() {
+      $(this).css("opacity", "0.5");
+    });
+  }
 });
