@@ -1,38 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home Page</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
-  </head>
-  <body>
-    <nav id="nav-bar">
-    <div class="appName">MapThing</div>
-    <div class="sign_in">Sign In</div>
-    </nav>
-    <content>
-    <div class="left">
-      test left
-      This is a bunch of random content... fkgjnslkjdfngksjdflgkjsdlfkjglksjdfnglkjsbdflkgbslkdfg
-      dfgkbsdfkgblksdbf;gkjhs;kdjfglkjsdfnbg;lksdfg
-      sdfgbsdlfkgb
-    </div>
-    <div class="map">
-      This is middle content
-      This is a bunch of random content... fkgjnslkjdfngksjdflgkjsdlfkjglksjdfnglkjsbdflkgbslkdfg
-      dfgkbsdfkgblksdbf;gkjhs;kdjfglkjsdfnbg;lksdfg
-      sdfgbsdlfkgb
-    </div>
-    <div class="right">
-      test right
-      This is a bunch of random content... fkgjnslkjdfngksjdflgkjsdlfkjglksjdfnglkjsbdflkgbslkdfg
-      dfgkbsdfkgblksdbf;gkjhs;kdjfglkjsdfnbg;lksdfg
-      sdfgbsdlfkgb
-    </div>
-
+<html>
+    <head>
+        <title>Bootstrap & Google maps Tutorial by Bootstrapious.com</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+        <!-- <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'> -->
+        <link href='/styles/custom.css' rel='stylesheet' type='text/css'>
+    </head>
+    <body>
+      <nav id="nav-bar">
+        <div class="appName">MapThing</div>
+        <div class="sign_in">Sign In</div>
+      </nav>
+      <content>
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-2 left">
+              Sample List of Maps
+              <ul> <a href=''>Map 1</a></ul>
+              <ul> <a href=''>Map 2</a></ul>
+              <ul> <a href=''>Map 3</a></ul>
+              <ul> <a href=''>Map 4</a></ul>
+              <ul> <a href=''>Map 5</a></ul>
+              <ul> <a href=''>Map 6</a></ul>
+            </div>
+            <div class="col-lg-10">
+              <div id="map"></div>
+            </div>
+          </div>
+        </div>
+        <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCuYj9zdOOcK5K8sQINm5Q0dzl7PgTr24s"></script>
+        <script src="/scripts/custom.js"></script>
     </content>
-    <footer>
-    sddfs
-    </footer>
-  </body>
+    </body>
 </html>
