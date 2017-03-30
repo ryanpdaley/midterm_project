@@ -14,12 +14,19 @@ body {
     background-color: #921818;
 }
 
+#nav-bar .logo {
+  height: 60px;
+  padding-bottom: 10px;
+  filter: invert(100%);
+}
+
 .appName {
   padding: 0 0 0 10px;
   font-size: 2em;
   line-height: 80px;
   color: #e8fdff;
   display: inline;
+  font-family: 'Revalia', cursive;
 }
 
 .sign_in {
@@ -40,6 +47,9 @@ body {
   float: left;
   word-wrap: break-word;
   padding: 5px;
+  font-family: 'Lato', sans-serif;
+  background-color: #ffffff;
+  z-index: 2;
 }
 
 .inline {
@@ -50,7 +60,20 @@ body {
   margin: 0 1%;
 }
 
+#map_canvas {
+    position: relative;
+}
+
 #map {
+    height: 100%;
+    width: 100%;
+    left: 0;
+    position: absolute;
+/*    top: 100px;
+*/    z-index: 1;
+}
+
+#map_working {
   width: 100%;
   height: 500px;
   margin-bottom: 15px;
