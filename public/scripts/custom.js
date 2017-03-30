@@ -20,15 +20,11 @@ function initMap() {
 
   var contentString = '<link href="../styles/custom.css" rel="stylesheet" type="text/css">' +
 '<div id="iw-container">' +
-'<div class="iw-title">Porcelain Factory of Vista Alegre</div>' +
+'<div class="iw-title">46 Spadina Ave., Toronto, On</div>' +
 '<div class="iw-content">' +
-'<div class="iw-subTitle">History</div>' +
-'<img src="../assets/lhl.jpg" alt="Porcelain Factory of Vista Alegre" height="115" width="83">' +
-'<p>Founded in 1824, the Porcelain Factory of Vista Alegre was the first industrial unit dedicated to porcelain production in Portugal. For the foundation and success of this risky industrial development was crucial the spirit of persistence of its founder, José Ferreira Pinto Basto. Leading figure in Portuguese society of the nineteenth century farm owner, daring dealer, wisely incorporated the liberal ideas of the century, having become "the first example of free enterprise" in Portugal.</p>' +
-'<div class="iw-subTitle">Contacts</div>' +
-'<p>VISTA ALEGRE ATLANTIS, SA<br>3830-292 Ílhavo - Portugal<br>'+
-'<br>Phone. +351 234 320 600<br>e-mail: geral@vaa.pt<br>www: www.myvistaalegre.com</p>'+
-'</div>' +
+'<div class="iw-subTitle">Random Text</div>' +
+'<img src="../assets/lhl.jpg" alt="46 Spadina Ave., Toronto, On" height="80" width="80">' +
+'<p>This is a random description of the building / point.</p>' +
 '<div class="iw-bottom-gradient"></div>' +
 '</div>';
   var infowindow = new google.maps.InfoWindow({
@@ -41,6 +37,3 @@ function initMap() {
   });
 }
 
-$( document ).ready(function() {
-  initMap()
-});
