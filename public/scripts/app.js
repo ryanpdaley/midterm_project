@@ -41,25 +41,24 @@ $( document ).ready(function() {
 
   initMap()
   $("#overlay").hide()
-  if (authenticated){
-    $(this).find( ".sign_in" ).hide();
-    $(this).find( ".onAuth" ).show();
-    $("#addList").click(function(ev) {
-      ev.preventDefault();
-      $("#overlay").show();
-    });
-    $("#overlay_close").click(function(ev) {
-      ev.preventDefault();
-      $("#overlay").hide();
-    });
-  } else {
-    $( ".sign_in" ).hover(function() {
-      $(this).css("opacity", "1");
-    }, function() {
-      $(this).css("opacity", "0.5");
-    });
-  }
+
+  $("#addList").click(function(ev) {
+    ev.preventDefault();
+    $("#overlay").show();
+    $("#overlay").css("opacity", "0.9");
+  });
+  $("#overlay_close").click(function(ev) {
+    ev.preventDefault();
+    $("#overlay").hide();
+  });
+
+  $( ".sign_in" ).hover(function() {
+    $(this).css("opacity", "1");
+  }, function() {
+    $(this).css("opacity", "0.5");
+  });
+
   $('.collapse a').click(function(){
     $(".collapse").collapse('hide');
-});
+  });
 });
