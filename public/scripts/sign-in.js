@@ -8,6 +8,13 @@ $(document).ready(function () {
       GoogleAuth.then(() => {
         GoogleAuth.signIn().then(()=>{
           const id_token = GoogleAuth.currentUser.get().getAuthResponse().id_token;
+
+          
+          //Hide Sign In Button
+
+          /*add code here*/
+
+
           $("input[name = 'id_token']").val(id_token);
           $(this).parent("form").submit();
         }, (err)=>{
