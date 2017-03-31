@@ -70,8 +70,13 @@ body {
   width: 100%;
 }
 
-#overlay_heater .close{
+#overlay_header .close{
   float: right;
+}
+
+.overlay_partial {
+  opacity: 0;
+  z-index: 3;
 }
 
 .right {

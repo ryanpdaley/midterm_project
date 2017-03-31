@@ -38,27 +38,42 @@ function initMap() {
 }
 
 $( document ).ready(function() {
-
   initMap()
-  $("#overlay").hide()
 
+  //  Show the overlay and the addList partial when clicked
   $("#addList").click(function(ev) {
     ev.preventDefault();
     $("#overlay").show();
     $("#overlay").css("opacity", "0.9");
+    $("#favourites_view").css("display", "none");
+    $("#addList_view").show();
+    $("#addList_view").css("opacity", "1");
   });
+
+  $("#favourites").click(function(ev) {
+    ev.preventDefault();
+    $("#overlay").show();
+    $("#overlay").css("opacity", "0.9");
+    $("#addList_view").css("display", "none");
+    $("#favourites_view").show();
+    $("#favourites_view").css("opacity", "1");
+  });
+
+  // Close / hide the overlay
   $("#overlay_close").click(function(ev) {
     ev.preventDefault();
     $("#overlay").hide();
   });
 
+  //  Sign-in button logic
   $( ".sign_in" ).hover(function() {
     $(this).css("opacity", "1");
   }, function() {
     $(this).css("opacity", "0.5");
   });
 
-  $('.collapse a').click(function(){
+  //  Drop-down auto-close
+  $( document ).click(function(){
     $(".collapse").collapse('hide');
   });
 });
