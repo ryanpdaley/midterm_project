@@ -1,5 +1,3 @@
-let authenticated = true;
-
 function initMap() {
 
   var location = new google.maps.LatLng(43.64443, -79.39483);

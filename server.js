@@ -1,10 +1,10 @@
 "use strict";
 
+// Testing data ... this will come from the backend
 let authenticated = true;
-
+let all_maps = ['map1', 'map2', 'map3', 'someTitle that is not a short map name'];
 let user = {
-  name: 'Ryan',
-  maps: ['map1', 'map2', 'map3', 'someTitle that is not a short map name']
+  name: 'Ryan'
 };
 
 require('dotenv').config();
@@ -49,7 +49,7 @@ app.use("/api/users", usersRoutes(knex));
 app.get("/", (req, res) => {
   res.render("index",
   {
-        authenticated: authenticated,
+        all_maps: all_maps,
         user: user
   }
   );
