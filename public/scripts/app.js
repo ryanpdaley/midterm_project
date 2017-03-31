@@ -1,9 +1,5 @@
 let authenticated = true;
 
-user = {
-  name: 'Ryan'
-};
-
 function initMap() {
 
   var location = new google.maps.LatLng(43.64443, -79.39483);
@@ -47,21 +43,12 @@ $( document ).ready(function() {
 
   initMap()
   $("#overlay").hide()
-  // $("#overlay").on("click", function (event) {
-  //       event.stopPropagation();
-  //   });
   if (authenticated){
     $(this).find( ".sign_in" ).hide();
     $(this).find( ".onAuth" ).show();
     $("#addList").click(function(ev) {
       ev.preventDefault();
       $("#overlay").show();
-      // $("#overlay").on("click", function (overlay_in) {
-      //   overlay_in.stopPropagation();
-      // });
-      // $(document).on("click", function () {
-      //   $("#overlay").hide();
-      // });
     });
     $("#overlay_close").click(function(ev) {
       ev.preventDefault();

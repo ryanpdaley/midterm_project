@@ -1,5 +1,12 @@
 "use strict";
 
+let authenticated = true;
+
+let user = {
+  name: 'Ryan',
+  maps: ['map1', 'map2', 'map3', 'someTitle that is not a short map name']
+};
+
 require('dotenv').config();
 
 const PORT        = process.env.PORT || 8080;
@@ -40,7 +47,12 @@ app.use("/api/users", usersRoutes(knex));
 
 // Home page
 app.get("/", (req, res) => {
-  res.render("index");
+  res.render("index",
+  {
+        authenticated: authenticated,
+        user: user
+  }
+  );
 });
 
 app.listen(PORT, () => {
