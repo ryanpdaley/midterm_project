@@ -1,4 +1,8 @@
-let authenticated = false;
+let authenticated = true;
+
+user = {
+  name: 'Ryan'
+};
 
 function initMap() {
 
@@ -39,21 +43,25 @@ function initMap() {
   });
 }
 
-function show_addList() {
-  $("#overlay").show();
-  return false;
-}
-
 $( document ).ready(function() {
 
   initMap()
   $("#overlay").hide()
+  // $("#overlay").on("click", function (event) {
+  //       event.stopPropagation();
+  //   });
   if (authenticated){
     $(this).find( ".sign_in" ).hide();
     $(this).find( ".onAuth" ).show();
-    $("addList").click(function(event) {
-      event.preventDefault();
+    $("#addList").click(function(ev) {
+      ev.preventDefault();
       $("#overlay").show();
+      // $("#overlay").on("click", function (overlay_in) {
+      //   overlay_in.stopPropagation();
+      // });
+      // $(document).on("click", function () {
+      //   $("#overlay").hide();
+      // });
     });
   } else {
     $( ".sign_in" ).hover(function() {
