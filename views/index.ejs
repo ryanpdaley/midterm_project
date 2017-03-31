@@ -27,9 +27,12 @@
                   </div>
                   <div id="collapse1" class="panel-collapse collapse">
                     <ul class="list-group">
-                      <li class="list-group-item"><a href=''>One</a></li>
+                    <% for (let i in user.maps) { %>
+                      <li class="list-group-item"><%= user.maps[i] %></li>
+                      <!-- <li class="list-group-item"><a href=''>One</a></li>
                       <li class="list-group-item">Two</li>
-                      <li class="list-group-item">Super-long title... what is going to happen??!? Wrap?</li>
+                      <li class="list-group-item">Super-long title... what is going to happen??!? Wrap?</li> -->
+                    <% } %>
                     </ul>
                     <!-- <div class="panel-footer">Footer</div> -->
                   </div>
