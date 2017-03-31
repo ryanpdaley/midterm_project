@@ -57,7 +57,7 @@ body {
   word-wrap: break-word;
   font-family: 'Lato', sans-serif;
   border-style: solid;
-  /*margin: 18px 20px;*/
+  border-color: #ccc;
   padding: 0 20px 20px 20px;
   border-radius: 7px;
   background-color: #ffffff;
