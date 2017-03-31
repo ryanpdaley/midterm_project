@@ -63,6 +63,10 @@ $( document ).ready(function() {
       //   $("#overlay").hide();
       // });
     });
+    $("#overlay_close").click(function(ev) {
+      ev.preventDefault();
+      $("#overlay").hide();
+    });
   } else {
     $( ".sign_in" ).hover(function() {
       $(this).css("opacity", "1");
@@ -70,4 +74,7 @@ $( document ).ready(function() {
       $(this).css("opacity", "0.5");
     });
   }
+  $('.collapse a').click(function(){
+    $(".collapse").collapse('hide');
+});
 });
