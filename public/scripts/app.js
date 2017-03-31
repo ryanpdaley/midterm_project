@@ -50,6 +50,7 @@ $( document ).ready(function() {
     $("#addList_view").css("opacity", "1");
   });
 
+  //  Show the overlay and the favourites partial when clicked
   $("#favourites").click(function(ev) {
     ev.preventDefault();
     $("#overlay").show();
@@ -65,7 +66,7 @@ $( document ).ready(function() {
     $("#overlay").hide();
   });
 
-  //  Sign-in button logic
+  //  Sign-in button hover state logic
   $( ".sign_in" ).hover(function() {
     $(this).css("opacity", "1");
   }, function() {
