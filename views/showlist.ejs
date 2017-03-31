@@ -1,0 +1,6 @@
+<ol>
+    <% for (let key in points) {%>
+    <li><a href="/user/point/<%= points[key].id %>"><%= points[key].title%></a></li>
+    <% }%>
+</ol>
+<a href="/user/list/<%= list_id %>/create">Create point of interest</a>

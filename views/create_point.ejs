@@ -1,0 +1,54 @@
+<form action="/user/list/point/create" method="post">
+    <input type="hidden" name="list_id" value="<%= list_id %>">
+    <input type="text" id="autocomplete" onfocus="geolocate()" placeholder="search">
+    <input type="text" name="address" placeholder="address">
+    <input type="text" name="title" placeholder="title">
+    <input type="text" name="lat" placeholder="latitude">
+    <input type="text" name="long" placeholder="longitude">
+    <input type="text" name="img_url" placeholder="Image URL">
+    <img src="" alt="">
+    <textarea name="desc" id="" cols="30" rows="10" placeholder="Description"></textarea>
+    <button type="submit">Create</button>
+</form>
+
+<script>
+  var placeSearch, autocomplete;
+
+  function initAutocomplete() {
+    autocomplete = new google.maps.places.Autocomplete(
+      (document.getElementById('autocomplete')),
+      {types: []});
+    autocomplete.addListener('place_changed', function () {
+      var place = autocomplete.getPlace();
+      var formatted_address = place.formatted_address;
+      var long = place.geometry.location.toJSON().lng;
+      var lat = place.geometry.location.toJSON().lat;
+      var img_url = `https://maps.googleapis.com/maps/api/streetview?size=200x200&location=${lat},${long}&key=AIzaSyApuXPdvWCHCFtRg-AYVTOlfXNIJ7y-HLA`;
+
+      $("input[name = address]").val(formatted_address);
+      $("input[name = long]").val(long);
+      $("input[name = lat]").val(lat);
+      $("input[name = img_url]").val(img_url);
+      $("img").attr("src", img_url);
+    });
+  }
+
+  function geolocate() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function(position) {
+        var geolocation = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        };
+        var circle = new google.maps.Circle({
+          center: geolocation,
+          radius: position.coords.accuracy
+        });
+        autocomplete.setBounds(circle.getBounds());
+      });
+    }
+  }
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyApuXPdvWCHCFtRg-AYVTOlfXNIJ7y-HLA&libraries=places&callback=initAutocomplete"
+        async defer></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

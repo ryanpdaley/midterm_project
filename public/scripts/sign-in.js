@@ -3,16 +3,18 @@ $(document).ready(function () {
 
     const GoogleAuth = gapi.auth2.init();
 
-    $("#sign_in").on("click", function () {
-      GoogleAuth.then((res) => {
-        GoogleAuth.signIn().then((res)=>{
+    $("#sign_in").on("click", function (event) {
+      event.preventDefault();
+      GoogleAuth.then(() => {
+        GoogleAuth.signIn().then(()=>{
           const id_token = GoogleAuth.currentUser.get().getAuthResponse().id_token;
-          
+          $("input[name = 'id_token']").val(id_token);
+          $(this).parent("form").submit();
         }, (err)=>{
           console.log(err);
         })
-      }, (err) => {
-        console.error(err);
+      }, (err)=>{
+        console.log(err);
       });
     });
 
