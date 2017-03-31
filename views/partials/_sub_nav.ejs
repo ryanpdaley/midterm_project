@@ -9,6 +9,7 @@
         </div>
         <div id="collapse1" class="panel-collapse collapse">
           <ul class="list-group">
+          <% console.log(all_maps) %>
           <% for (let i in all_maps) { %>
             <li class="list-group-item"><%= all_maps[i] %></li>
           <% } %>
@@ -23,7 +24,7 @@
       <div class="close">
         <span id='overlay_close' class="glyphicon glyphicon-remove"></span>
       </div>
-      This is the header
+      <!-- Maybe put a header here... -->
     </div>
     <div id='addList_view'>
       <% include _addList %>
@@ -46,7 +47,6 @@
               <li class="list-group-item"><a id='favourites' href=''>Favourites</a></li>
               <li class="list-group-item"><a id='logout' href=''>Log out</a></li>
             </ul>
-            <!-- <div class="panel-footer">Footer</div> -->
           </div>
         </div>
       </div>
