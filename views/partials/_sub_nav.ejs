@@ -14,9 +14,9 @@
         </div>
         <div id="collapse1" class="panel-collapse collapse">
           <ul class="list-group">
-          <% console.log(all_maps) %>
-          <% for (let i in all_maps) { %>
-            <li class="list-group-item"><%= all_maps[i] %></li>
+          <% console.log(lists) %>
+          <% for (let key in lists) {%>
+            <li class="list-group-item"><a href="/map/<%= lists[key].id %>"><%= lists[key].name %></a></li>
           <% } %>
           </ul>
         </div>

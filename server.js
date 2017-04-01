@@ -54,12 +54,9 @@ app.get("/", (req, res) => {
   } else {
     user = 0;
   }
-  res.render("index",
-  {
-        all_maps: all_maps,
-        user: user
-  }
-  );
+  knex("list").select().asCallback((error, result) => {
+   res.render("index", {user, lists: result});
+  })
 });
 
 app.get("/sign-in", (req, res) => {
