@@ -3,3 +3,5 @@ node_modules/
 .idea
 *.log
 *.sqlite3
+public/test.html
+.DS*

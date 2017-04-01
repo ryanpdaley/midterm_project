@@ -1,5 +1,8 @@
 "use strict";
 
+let user = {};
+let all_maps = {};
+
 require('dotenv').config();
 
 const PORT = process.env.PORT || 8080;
@@ -31,22 +34,32 @@ app.use(knexLogger(knex));
 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
-app.use("/styles", sass({
-  src: __dirname + "/styles",
-  dest: __dirname + "/public/styles",
-  debug: true,
-  outputStyle: 'expanded'
-}));
+
 app.use(express.static("public"));
 
 // Mount all resource routes
 app.use("/api/users", usersRoutes(knex));
 
 // Home page
+// app.get("/", (req, res) => {
+//   knex("list").select().asCallback((error, result) => {
+//     res.render("index", {lists: result});
+//   })
+// });
+
 app.get("/", (req, res) => {
-  knex("list").select().asCallback((error, result) => {
-    res.render("index", {lists: result});
-  })
+  let user;
+  if (req.session.google_id) {
+    user = req.session.google_id;
+  } else {
+    user = 0;
+  }
+  res.render("index",
+  {
+        all_maps: all_maps,
+        user: user
+  }
+  );
 });
 
 app.get("/sign-in", (req, res) => {
