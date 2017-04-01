@@ -1,12 +1,14 @@
+<% include partials/_head %>
+<% include partials/_nav %>
 <form action="/user/list/point/create" method="post">
     <input type="hidden" name="list_id" value="<%= list_id %>">
     <input type="text" id="autocomplete" onfocus="geolocate()" placeholder="search">
     <input type="text" name="address" placeholder="address">
-    <input type="text" name="title" placeholder="title">
+    <input type="text" name="title" value="title">
     <input type="text" name="lat" placeholder="latitude">
     <input type="text" name="long" placeholder="longitude">
     <input type="text" name="img_url" placeholder="Image URL">
-    <img src="" alt="">
+    <img class='img_url' src="" alt="">
     <textarea name="desc" id="" cols="30" rows="10" placeholder="Description"></textarea>
     <button type="submit">Create</button>
 </form>
@@ -29,7 +31,7 @@
       $("input[name = long]").val(long);
       $("input[name = lat]").val(lat);
       $("input[name = img_url]").val(img_url);
-      $("img").attr("src", img_url);
+      $(".img_url").attr("src", img_url);
     });
   }
 

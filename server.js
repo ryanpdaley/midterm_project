@@ -40,23 +40,47 @@ app.use(express.static("public"));
 // Mount all resource routes
 app.use("/api/users", usersRoutes(knex));
 
+
+
+var isLikedQuery = function(list_id) {
+  knex.select("*").from("favourite").where("list_id", "=", list_id).then(function (values) {
+    return values.length;
+  }).catch(function(err) {
+    console.log(err);
+  }).finally(function() {
+    knex.destroy();
+  });
+}
+
 // Home page
 app.get("/", (req, res) => {
   let user;
   let list_id;
+  let data;
+  let liked;
+  if (req.query.subpage) {
+    data = JSON.parse(req.query.data)[0]
+  } else {
+    data = {}
+  }
   if (req.query.list_id) {
     list_id = req.query.list_id;
   } else {
     list_id = 0;
   }
-  console.log(list_id)
+  if (req.query.liked) {
+    liked = req.query.liked;
+  } else {
+    liked = false;
+  }
   if (req.session.google_id) {
     user = req.session.google_id;
   } else {
     user = 0;
   }
+  console.log(`Server liked = ${liked}`)
   knex("list").select().asCallback((error, result) => {
-   res.render("index", {user, lists: result, list_id: list_id});
+   res.render("index", {user, lists: result, list_id: list_id, data: data, isLiked: liked});
   })
 });
 
@@ -79,40 +103,27 @@ app.get("/map/:id", (req,  res) => {
   let list_id = req.params.id;
   let isSignedIn = false;
   let liked = false;
-
-  let urlBuilder = `?list_id=${list_id}`
-  res.redirect("/" + urlBuilder);
+  if (req.session.google_id) {
+    knex("favourite").select().where("list_id", "=", req.params.id).asCallback((error, result) => {
+      console.log(result)
+      if (error) {
+        console.log(error);
+      } else {
+        if (result.length && result[0].user_id == req.session.google_id) {
+          liked = true;
+        }
+        isSignedIn = true;
+      }
+      console.log(`map get: ${liked}`)
+      let urlBuilder = `?list_id=${list_id}&liked=${liked}&isSignedIn=${isSignedIn}`
+      res.redirect("/" + urlBuilder);
+    });
+  } else {
+    console.log(`map get: ${liked}`)
+    let urlBuilder = `?list_id=${list_id}&liked=${liked}&isSignedIn=${isSignedIn}`
+    res.redirect("/" + urlBuilder);
+  }
 });
-
-// app.get("/map/:id", (req, res) => {
-//   knex("list").select().join("point", "point.list_id", "=", "list.id").where("list.id", "=", req.params.id).asCallback((error, result) => {
-//     if (error) {
-//       console.log(error);
-//     } else {
-//       let isSignedIn = false;
-//       let liked = false;
-//       if (req.session.google_id) {
-//         knex("favourite").select().where("list_id", "=", req.params.id).asCallback((error, result) => {
-//           if (error) {
-//             console.log(error);
-//           } else {
-//             if (result.length && result[0].user_id === req.session.google_id) {liked = true;}
-//             isSignedIn = true;
-//             res.redirect("/", {
-//               liked: liked,
-//               isSignedIn: isSignedIn,
-//               points: result,
-//               list_id: req.params.id,
-//               google_id: req.session.google_id
-//             });
-//           }
-//         })
-//       } else {
-//         res.redirect("/", {isSignedIn: isSignedIn, points: result, list_id: req.params.id});
-//       }
-//     }
-//   })
-// });
 
 app.get("/user", (req, res) => {
   if (!req.session.google_id) {
@@ -123,17 +134,19 @@ app.get("/user", (req, res) => {
   }
 });
 
+
 app.get("/user/favourite", (req, res) => {
   if (!req.session.google_id) {
     console.log("User not signed in");
     res.redirect("/");
   } else {
+    let user = req.session.google_id;
     knex("favourite").select("name", "list_id").join("list", "list.id", "=", "favourite.list_id").where({"favourite.user_id": req.session.google_id}).asCallback((error, result)=>{
       if (error) {
         console.log(error);
       } else {
         console.log(result);
-        res.render("favourite", {maps: result});
+        res.render("favourite", {maps: result, user: user});
       }
     });
   }
@@ -144,13 +157,14 @@ app.get("/user/list", (req, res) => {
     console.log("User not signed in");
     res.redirect("/");
   } else {
+    let user = req.session.google_id;
     knex.select().from('list')
       .where({user_id: req.session.google_id})
       .asCallback(function (error, result) {
         if (error) {
           console.log(error);
         } else {
-          res.render('showlists', {list: result});
+          res.render('showlists', {list: result, user: user});
         }
       })
   }
@@ -162,6 +176,7 @@ app.get("/user/point/:id", (req, res) => {
     console.log("User not signed in");
     res.redirect("/");
   } else {
+    let user = req.session.google_id;
     knex("point").select().where("id", "=", req.params.id).asCallback((error, result) => {
       if (error) {
         console.log(error)
@@ -173,7 +188,7 @@ app.get("/user/point/:id", (req, res) => {
         } else {
           const point = result[0];
           console.log(point);
-          res.render("showpoint", {point: point});
+          res.render("showpoint", {point: point, user: user});
         }
       }
     });
@@ -225,7 +240,7 @@ app.get("/user/list/:id", (req, res) => {
     console.log("User not signed in");
     res.redirect("/");
   } else {
-
+    let user = req.session.google_id;
     knex("list").select("user_id").where("id", "=", req.params.id).asCallback((error, result) => {
       if (error) {
         console.log(error);
@@ -245,7 +260,7 @@ app.get("/user/list/:id", (req, res) => {
           console.log(error)
         } else {
           console.log(result);
-          res.render("showlist", {points: result, list_id: req.params.id});
+          res.render("showlist", {points: result, list_id: req.params.id, user: user});
         }
       });
   }
@@ -257,6 +272,7 @@ app.get("/user/list/:id/create", (req, res) => {
     console.log("User not signed in");
     res.redirect("/");
   } else {
+    let user = req.session.google_id;
     knex("list").select("user_id").where("id", "=", req.params.id).asCallback((error, result) => {
       if (error) {
         console.log(error);
@@ -266,7 +282,7 @@ app.get("/user/list/:id/create", (req, res) => {
           console.log("Not the same user who created the list");
           res.status(403).redirect("/");
         } else {
-          res.render("create_point", {list_id: req.params.id});
+          res.render("create_point", {list_id: req.params.id, user: user});
         }
       }
     });

@@ -1,3 +1,5 @@
+<% include partials/_head %>
+<% include partials/_nav %>
 <form action="/user/point/<%= point.id%>/update" method="post">
     <input type="text" id="autocomplete" placeholder="search">
     <input type="hidden" name="user_id" value="<%= point.user_id %>">

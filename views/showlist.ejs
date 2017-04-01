@@ -1,3 +1,5 @@
+<% include partials/_head %>
+<% include partials/_nav %>
 <ol>
     <% for (let key in points) {%>
     <li><a href="/user/point/<%= points[key].id %>"><%= points[key].title%></a></li>

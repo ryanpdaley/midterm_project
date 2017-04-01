@@ -1,6 +1,12 @@
-<ol>
+<% include partials/_head %>
+<% include partials/_nav %>
+<div class='showLists'>
+<% console.log(list)%>
+<table>
     <% for(let key in list) {%>
-    <li><a href="/user/list/<%= list[key].id%>"><%= list[key].name%></a></li>
+    <tr>
+    <th><a href="/user/list/<%= list[key].id%>"><h2><%= list[key].name%></h2></a></th>
+    </tr>
     <% }%>
-</ol>
-<a href="/user/list/create">Create new list</a>
+</table>
+</div>

@@ -28,26 +28,26 @@ $( document ).ready(function() {
   });
 
   //  Show the overlay and the myLists partial when clicked
-  $("#myLists").click(function(ev) {
-    ev.preventDefault();
-    $("#overlay").show();
-    $("#overlay").css("opacity", "0.9");
-    $("#favourites_view").css("display", "none");
-    $("#addList_view").css("display", "none");
-    $("#myLists_view").show();
-    $("#myLists_view").css("opacity", "1");
-  });
+  // $("#myLists").click(function(ev) {
+  //   ev.preventDefault();
+  //   $("#overlay").show();
+  //   $("#overlay").css("opacity", "0.9");
+  //   $("#favourites_view").css("display", "none");
+  //   $("#addList_view").css("display", "none");
+  //   $("#myLists_view").show();
+  //   $("#myLists_view").css("opacity", "1");
+  // });
 
   //  Show the overlay and the favourites partial when clicked
-  $("#favourites").click(function(ev) {
-    ev.preventDefault();
-    $("#overlay").show();
-    $("#overlay").css("opacity", "0.9");
-    $("#addList_view").css("display", "none");
-    $("#myLists_view").css("display", "none");
-    $("#favourites_view").show();
-    $("#favourites_view").css("opacity", "1");
-  });
+  // $("#favourites").click(function(ev) {
+  //   ev.preventDefault();
+  //   $("#overlay").show();
+  //   $("#overlay").css("opacity", "0.9");
+  //   $("#addList_view").css("display", "none");
+  //   $("#myLists_view").css("display", "none");
+  //   $("#favourites_view").show();
+  //   $("#favourites_view").css("opacity", "1");
+  // });
 
   // Close / hide the overlay
   $("#overlay_close").click(function(ev) {

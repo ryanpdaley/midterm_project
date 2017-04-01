@@ -14,7 +14,11 @@ body {
     background-color: #921818;
 }
 
-#nav-bar .logo {
+#nav-bar a {
+  color: #fff;
+}
+
+#nav-bar #logo {
   height: 60px;
   padding-bottom: 10px;
   filter: invert(100%);
@@ -50,6 +54,14 @@ form {
   background-color: #ffffff;
   opacity: 0.5;
   display: inline;
+}
+
+.addListOverlay{
+  padding: 20px 0;
+}
+
+.showLists {
+  padding: 20px;
 }
 
 .left {

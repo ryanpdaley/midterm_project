@@ -1,1 +1,8 @@
-favourites!
+<h1>My Favourite Lists</h1>
+<% console.log(data) %>
+<ol>
+    <% for (let key in data) {%>
+    <% console.log(data[key]) %>
+    <li><a href="/map/<%= data[key].list_id %>"><%= data[key].name%></a></li>
+    <% }%>
+</ol>
