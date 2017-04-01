@@ -1,0 +1,55 @@
+<% if (isSignedIn && !liked){ %>
+<form action="/map/<%= list_id %>/like" method="post">
+    <button type="submit">Like this map</button>
+</form>
+<% } %>
+<% if (isSignedIn && liked){ %>
+<form action="/map/<%= list_id %>/unlike" method="post">
+    <button type="submit">unlike this map</button>
+</form>
+<% } %>
+
+<input type="hidden" id="list_id" value="<%= list_id %>">
+
+<style>
+    #map {
+        height: 400px;
+        width: 100%;
+    }
+</style>
+<div id="map"></div>
+
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyApuXPdvWCHCFtRg-AYVTOlfXNIJ7y-HLA&libraries=places"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script>
+  const list_id = $("#list_id").val();
+  $.ajax("/getPoints/" + list_id).done(function (data, textStatus, jqXHR) {
+
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 11,
+      center: {lat: 43.644087, lng: -79.387014}
+    });
+
+
+    for (let key in data) {
+      const marker = new google.maps.Marker({
+        position: {lat: Number(data[key].lat), lng: Number(data[key].long)},
+        map: map
+      });
+
+      var content = `<h2>${data[key].title}</h2><h3>${data[key].address}</h3><img src='${data[key].img_url}'><p>${data[key].desc}</p>`;
+
+      var infowindow = new google.maps.InfoWindow();
+
+      google.maps.event.addListener(marker,'click', (function(marker,content,infowindow){
+        return function() {
+          infowindow.setContent(content);
+          infowindow.open(map,marker);
+        };
+      })(marker,content,infowindow));
+    }
+  });
+
+</script>

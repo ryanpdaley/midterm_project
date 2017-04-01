@@ -1,0 +1,6 @@
+<h1>My Favourite Lists</h1>
+<ol>
+    <% for (let key in maps) {%>
+    <li><a href="/map/<%= maps[key].list_id %>"><%= maps[key].name%></a></li>
+    <% }%>
+</ol>

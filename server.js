@@ -44,7 +44,9 @@ app.use("/api/users", usersRoutes(knex));
 
 // Home page
 app.get("/", (req, res) => {
-  res.render("index");
+  knex("list").select().asCallback((error, result) => {
+    res.render("index", {lists: result});
+  })
 });
 
 app.get("/sign-in", (req, res) => {
@@ -59,6 +61,61 @@ app.get("/sign-in", (req, res) => {
 app.get("/logout", (req, res) => {
   req.session = null;
   res.redirect("/");
+});
+
+app.get("/map/:id", (req, res) => {
+  knex("list").select().join("point", "point.list_id", "=", "list.id").where("list.id", "=", req.params.id).asCallback((error, result) => {
+    if (error) {
+      console.log(error);
+    } else {
+      let isSignedIn = false;
+      let liked = false;
+      if (req.session.google_id) {
+        knex("favourite").select().where("list_id", "=", req.params.id).asCallback((error, result) => {
+          if (error) {
+            console.log(error);
+          } else {
+            if (result.length && result[0].user_id === req.session.google_id) {liked = true;}
+            isSignedIn = true;
+            res.render("showmap", {
+              liked: liked,
+              isSignedIn: isSignedIn,
+              points: result,
+              list_id: req.params.id,
+              google_id: req.session.google_id
+            });
+          }
+        })
+      } else {
+        res.render("showmap", {isSignedIn: isSignedIn, points: result, list_id: req.params.id});
+      }
+    }
+  })
+});
+
+app.get("/user", (req, res) => {
+  if (!req.session.google_id) {
+    console.log("User not signed in");
+    res.redirect("/");
+  } else {
+    res.render("user");
+  }
+});
+
+app.get("/user/favourite", (req, res) => {
+  if (!req.session.google_id) {
+    console.log("User not signed in");
+    res.redirect("/");
+  } else {
+    knex("favourite").select("name", "list_id").join("list", "list.id", "=", "favourite.list_id").where({"favourite.user_id": req.session.google_id}).asCallback((error, result)=>{
+      if (error) {
+        console.log(error);
+      } else {
+        console.log(result);
+        res.render("favourite", {maps: result});
+      }
+    });
+  }
 });
 
 app.get("/user/list", (req, res) => {
@@ -84,7 +141,7 @@ app.get("/user/point/:id", (req, res) => {
     console.log("User not signed in");
     res.redirect("/");
   } else {
-    knex("point").select().where("id", "=", req.params.id).asCallback((error, result)=>{
+    knex("point").select().where("id", "=", req.params.id).asCallback((error, result) => {
       if (error) {
         console.log(error)
       } else {
@@ -102,12 +159,12 @@ app.get("/user/point/:id", (req, res) => {
   }
 });
 
-app.get("/user/point/:id/delete", (req, res)=>{
+app.get("/user/point/:id/delete", (req, res) => {
   if (!req.session.google_id) {
     console.log("User not signed in");
     res.redirect("/");
   } else {
-    knex("point").select().where("id", "=", req.params.id).asCallback((error, result)=>{
+    knex("point").select().where("id", "=", req.params.id).asCallback((error, result) => {
       console.log(req.params.id);
       if (error) {
         console.log(error)
@@ -118,8 +175,8 @@ app.get("/user/point/:id/delete", (req, res)=>{
           console.log("Not the same user who created the list");
           res.status(403).redirect("/");
         } else {
-          knex("point").where("id", "=", req.params.id).del().asCallback((error, result)=>{
-            if (error){
+          knex("point").where("id", "=", req.params.id).del().asCallback((error, result) => {
+            if (error) {
               console.log(error);
             } else {
               console.log("Point deleted");
@@ -146,14 +203,14 @@ app.get("/user/list/:id", (req, res) => {
   if (!req.session.google_id) {
     console.log("User not signed in");
     res.redirect("/");
-  }  else {
+  } else {
 
-    knex("list").select("user_id").where("id", "=", req.params.id).asCallback( (error, result) => {
+    knex("list").select("user_id").where("id", "=", req.params.id).asCallback((error, result) => {
       if (error) {
         console.log(error);
       } else {
         const user_id = result[0].user_id;
-        if (user_id !== req.session.google_id){
+        if (user_id !== req.session.google_id) {
           console.log("Not the same user who created the list");
           res.status(403).redirect("/");
         }
@@ -178,13 +235,13 @@ app.get("/user/list/:id/create", (req, res) => {
   if (!req.session.google_id) {
     console.log("User not signed in");
     res.redirect("/");
-  }  else {
-    knex("list").select("user_id").where("id", "=", req.params.id).asCallback( (error, result) => {
+  } else {
+    knex("list").select("user_id").where("id", "=", req.params.id).asCallback((error, result) => {
       if (error) {
         console.log(error);
       } else {
         const user_id = result[0].user_id;
-        if (user_id !== req.session.google_id){
+        if (user_id !== req.session.google_id) {
           console.log("Not the same user who created the list");
           res.status(403).redirect("/");
         } else {
@@ -192,6 +249,52 @@ app.get("/user/list/:id/create", (req, res) => {
         }
       }
     });
+  }
+});
+
+app.get("/getPoints/:id", (req, res)=>{
+  knex("list").select().join("point", "point.list_id", "=", "list.id").where("list.id", "=", req.params.id).asCallback((error, result)=>{
+    if (error){
+      console.log(error);
+    } else {
+      console.log(result);
+      res.send(result);
+    }
+  });
+});
+
+app.post("/map/:id/like", (req, res) => {
+  if (!req.session.google_id) {
+    console.log("User not signed in");
+    res.redirect("/");
+  } else {
+    knex("favourite").insert({list_id: req.params.id, user_id: req.session.google_id}).asCallback((error, result) => {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log("Like inserted");
+        res.redirect(`/map/${req.params.id}`);
+      }
+    })
+  }
+});
+
+app.post("/map/:id/unlike", (req, res) => {
+  if (!req.session.google_id) {
+    console.log("User not signed in");
+    res.redirect("/");
+  } else {
+    knex("favourite").where({
+      list_id: req.params.id,
+      user_id: req.session.google_id
+    }).del().asCallback((error, result) => {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log("Map unliked");
+        res.redirect(`/map/${req.params.id}`);
+      }
+    })
   }
 });
 
@@ -218,7 +321,7 @@ app.post("/user/list/create", (req, res) => {
   }
 });
 
-app.post("/user/list/point/create", (req, res)=>{
+app.post("/user/list/point/create", (req, res) => {
   if (!req.session.google_id) {
     console.log("User not signed in");
     res.redirect("/");
@@ -243,16 +346,16 @@ app.post("/user/list/point/create", (req, res)=>{
   }
 });
 
-app.post("/user/point/:id/update", (req, res)=>{
+app.post("/user/point/:id/update", (req, res) => {
   if (!req.session.google_id) {
     console.log("User not signed in");
     res.redirect("/");
   } else {
-    knex("point").select("user_id").where("id", "=", req.params.id).asCallback((error, result)=>{
+    knex("point").select("user_id").where("id", "=", req.params.id).asCallback((error, result) => {
       if (error) {
         console.log(error);
       } else {
-        if (result[0].user_id !== req.session.google_id){
+        if (result[0].user_id !== req.session.google_id) {
           console.log("Not the same user created the point")
           res.status(403).redirect("/");
         } else {
@@ -263,8 +366,8 @@ app.post("/user/point/:id/update", (req, res)=>{
             lat: req.body.lat,
             desc: req.body.desc,
             img_url: req.body.img_url
-          }).asCallback((error, result)=>{
-            if (error){
+          }).asCallback((error, result) => {
+            if (error) {
               console.log(error);
             } else {
               console.log("Point updated");

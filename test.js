@@ -16,9 +16,13 @@ const knexLogger  = require('knex-logger');
 const request = require('request');
 const cookieSession = require('cookie-session');
 
-knex("google_user").insert({
-  google_id: "101009559760674447488",
-  name: "Boris Xiao",
-  email: "borishaw@gmail.com"
-});
+knex("favourite").select("name", "list_id").join("list", "list.id", "=", "favourite.list_id").where({
+  "favourite.user_id": "101009559760674447488",
+}).asCallback((error, result)=>{
+  if (error) {
+    console.log(error);
+  } else {
+    console.log(result);
+  }
+})
 
