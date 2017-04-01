@@ -114,12 +114,10 @@ app.get("/map/:id", (req,  res) => {
         }
         isSignedIn = true;
       }
-      console.log(`map get: ${liked}`)
       let urlBuilder = `?list_id=${list_id}&liked=${liked}&isSignedIn=${isSignedIn}`
       res.redirect("/" + urlBuilder);
     });
   } else {
-    console.log(`map get: ${liked}`)
     let urlBuilder = `?list_id=${list_id}&liked=${liked}&isSignedIn=${isSignedIn}`
     res.redirect("/" + urlBuilder);
   }
