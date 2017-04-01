@@ -1,22 +1,5 @@
-<% if (isSignedIn && !liked){ %>
-<form action="/map/<%= list_id %>/like" method="post">
-    <button type="submit">Like this map</button>
-</form>
-<% } %>
-<% if (isSignedIn && liked){ %>
-<form action="/map/<%= list_id %>/unlike" method="post">
-    <button type="submit">unlike this map</button>
-</form>
-<% } %>
-
 <input type="hidden" id="list_id" value="<%= list_id %>">
-
-<style>
-    #map {
-        height: 400px;
-        width: 100%;
-    }
-</style>
+<link href='/styles/layout.css' rel='stylesheet' type='text/css'>
 <div id="map"></div>
 
 
@@ -29,7 +12,8 @@
 
     var map = new google.maps.Map(document.getElementById('map'), {
       zoom: 11,
-      center: {lat: 43.644087, lng: -79.387014}
+      center: {lat: 43.644087, lng: -79.387014},
+      disableDefaultUI: true
     });
 
 
