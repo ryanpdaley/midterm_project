@@ -1,8 +1,14 @@
 <% include partials/_head %>
 <% include partials/_nav %>
 <h1>My Favourite Lists</h1>
-<ol>
+<table>
     <% for (let key in maps) {%>
-    <li><a href="/map/<%= maps[key].list_id %>"><%= maps[key].name%></a></li>
+
+    <tr>
+    <th><a href="/map/<%= maps[key].list_id %>"><%= maps[key].name%></a></th>
+    <th><form action="/map/<%= maps[key].list_id %>/unlike" method="post">
+    <button type="submit">unlike this map</button>
+    </form></th>
+    </tr>
     <% }%>
-</ol>
+</table>
