@@ -41,12 +41,6 @@ app.use(express.static("public"));
 app.use("/api/users", usersRoutes(knex));
 
 // Home page
-// app.get("/", (req, res) => {
-//   knex("list").select().asCallback((error, result) => {
-//     res.render("index", {lists: result});
-//   })
-// });
-
 app.get("/", (req, res) => {
   let user;
   if (req.session.google_id) {
@@ -69,6 +63,7 @@ app.get("/sign-in", (req, res) => {
 });
 
 app.get("/logout", (req, res) => {
+  // We should probably logout of Google too, but leaving it this way makes testing easier...
   req.session = null;
   res.redirect("/");
 });
