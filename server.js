@@ -77,7 +77,11 @@ app.get("/logout", (req, res) => {
 
 app.get("/map/:id", (req,  res) => {
   let list_id = req.params.id;
-  res.redirect("/?list_id=" + list_id);
+  let isSignedIn = false;
+  let liked = false;
+
+  let urlBuilder = `?list_id=${list_id}`
+  res.redirect("/" + urlBuilder);
 });
 
 // app.get("/map/:id", (req, res) => {
