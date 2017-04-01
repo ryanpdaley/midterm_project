@@ -15,7 +15,7 @@ function initalMap() {
 }
 
 $( document ).ready(function() {
-  initalMap()
+  //initalMap()
 
   //  Show the overlay and the addList partial when clicked
   $("#addList").click(function(ev) {

@@ -43,13 +43,20 @@ app.use("/api/users", usersRoutes(knex));
 // Home page
 app.get("/", (req, res) => {
   let user;
+  let list_id;
+  if (req.query.list_id) {
+    list_id = req.query.list_id;
+  } else {
+    list_id = 0;
+  }
+  console.log(list_id)
   if (req.session.google_id) {
     user = req.session.google_id;
   } else {
     user = 0;
   }
   knex("list").select().asCallback((error, result) => {
-   res.render("index", {user, lists: result});
+   res.render("index", {user, lists: result, list_id: list_id});
   })
 });
 
@@ -68,35 +75,40 @@ app.get("/logout", (req, res) => {
   res.redirect("/");
 });
 
-app.get("/map/:id", (req, res) => {
-  knex("list").select().join("point", "point.list_id", "=", "list.id").where("list.id", "=", req.params.id).asCallback((error, result) => {
-    if (error) {
-      console.log(error);
-    } else {
-      let isSignedIn = false;
-      let liked = false;
-      if (req.session.google_id) {
-        knex("favourite").select().where("list_id", "=", req.params.id).asCallback((error, result) => {
-          if (error) {
-            console.log(error);
-          } else {
-            if (result.length && result[0].user_id === req.session.google_id) {liked = true;}
-            isSignedIn = true;
-            res.render("showmap", {
-              liked: liked,
-              isSignedIn: isSignedIn,
-              points: result,
-              list_id: req.params.id,
-              google_id: req.session.google_id
-            });
-          }
-        })
-      } else {
-        res.render("showmap", {isSignedIn: isSignedIn, points: result, list_id: req.params.id});
-      }
-    }
-  })
+app.get("/map/:id", (req,  res) => {
+  let list_id = req.params.id;
+  res.redirect("/?list_id=" + list_id);
 });
+
+// app.get("/map/:id", (req, res) => {
+//   knex("list").select().join("point", "point.list_id", "=", "list.id").where("list.id", "=", req.params.id).asCallback((error, result) => {
+//     if (error) {
+//       console.log(error);
+//     } else {
+//       let isSignedIn = false;
+//       let liked = false;
+//       if (req.session.google_id) {
+//         knex("favourite").select().where("list_id", "=", req.params.id).asCallback((error, result) => {
+//           if (error) {
+//             console.log(error);
+//           } else {
+//             if (result.length && result[0].user_id === req.session.google_id) {liked = true;}
+//             isSignedIn = true;
+//             res.redirect("/", {
+//               liked: liked,
+//               isSignedIn: isSignedIn,
+//               points: result,
+//               list_id: req.params.id,
+//               google_id: req.session.google_id
+//             });
+//           }
+//         })
+//       } else {
+//         res.redirect("/", {isSignedIn: isSignedIn, points: result, list_id: req.params.id});
+//       }
+//     }
+//   })
+// });
 
 app.get("/user", (req, res) => {
   if (!req.session.google_id) {
