@@ -5,7 +5,7 @@
     <h2>My Favourite Lists:</h2>
   </div>
   <table class='listTable'>
-    <tr><th><h3>List Name: </h3></th><th><h3>Actions: </h3></th></tr>
+    <tr><th style="width:50%"></th><th style="width:50%"></th></tr>
     <% for (let key in maps) {%>
     <tr>
     <th><a href="/map/<%= maps[key].list_id %>">- <%= maps[key].name%></a></th>
