@@ -41,17 +41,6 @@ app.use(express.static("public"));
 app.use("/api/users", usersRoutes(knex));
 
 
-
-var isLikedQuery = function(list_id) {
-  knex.select("*").from("favourite").where("list_id", "=", list_id).then(function (values) {
-    return values.length;
-  }).catch(function(err) {
-    console.log(err);
-  }).finally(function() {
-    knex.destroy();
-  });
-}
-
 // Home page
 app.get("/", (req, res) => {
   let user;
@@ -156,9 +145,10 @@ app.get("/user/list", (req, res) => {
     res.redirect("/");
   } else {
     let user = req.session.google_id;
-    knex.select().from('list')
-      .where({user_id: req.session.google_id})
-      .asCallback(function (error, result) {
+    knex('list').select('list.id', 'list.name', 'list.user_id', knex.raw(`CASE WHEN favourite.id IS NULL THEN 0 ELSE 1 END AS isFav`))
+    .leftJoin('favourite', 'list.id', 'favourite.list_id')
+    .where({'list.user_id': user})
+    .asCallback(function (error, result) {
         if (error) {
           console.log(error);
         } else {
@@ -308,7 +298,7 @@ app.post("/map/:id/like", (req, res) => {
         console.log(error);
       } else {
         console.log("Like inserted");
-        res.redirect(`/map/${req.params.id}`);
+        res.redirect('/user/list');
       }
     })
   }
@@ -327,7 +317,7 @@ app.post("/map/:id/unlike", (req, res) => {
         console.log(error);
       } else {
         console.log("Map unliked");
-        res.redirect(`/map/${req.params.id}`);
+        res.redirect('/user/list');
       }
     })
   }

@@ -1,12 +1,30 @@
 <% include partials/_head %>
 <% include partials/_nav %>
-<div class='showLists'>
-<% console.log(list)%>
-<table>
-    <% for(let key in list) {%>
-    <tr>
-    <th><a href="/user/list/<%= list[key].id%>"><h2><%= list[key].name%></h2></a></th>
-    </tr>
-    <% }%>
-</table>
+<div class='lists'>
+  <div class='listHeader'>
+    <h2>My Lists:</h2>
+  </div>
+  <table class='listTable'>
+      <% for(let key in list) {%>
+        <tr>
+          <th><a href="/user/list/<%= list[key].id%>"><h3>- <%= list[key].name %> </h3></a></th>
+          <th>
+            <form action="" method="post">
+              <button type="submit">Delete</button>
+            </form>
+          </th>
+          <th>
+          <% if (list[key].isfav) { %>
+            <form action="/map/<%= list[key].id %>/unlike" method="post">
+              <button type="submit">UnFavourite!</button>
+            </form>
+          <% } else { %>
+            <form action="/map/<%= list[key].id %>/like" method="post">
+              <button type="submit">Favourite!</button>
+            </form>
+          <% } %>
+          </th>
+        </tr>
+      <% }%>
+  </table>
 </div>
