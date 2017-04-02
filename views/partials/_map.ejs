@@ -8,6 +8,7 @@
 
 <script>
   const list_id = $("#list_id").val();
+  var infowindow;
   $.ajax("/getPoints/" + list_id).done(function (data, textStatus, jqXHR) {
 
     var map = new google.maps.Map(document.getElementById('map'), {
@@ -23,8 +24,6 @@
         map: map
       });
 
-      // var content = `<h2>${data[key].title}</h2><h3>${data[key].address}</h3><img src='${data[key].img_url}'><p>${data[key].desc}</p>`;
-
 
       var content = `<link href="../styles/custom.css" rel="stylesheet" type="text/css">` +
     `<div id="iw-container">` +
@@ -36,7 +35,7 @@
     `<div class="iw-bottom-gradient"></div>` +
     `</div>`;
 
-      var infowindow = new google.maps.InfoWindow();
+      infowindow = new google.maps.InfoWindow();
 
       google.maps.event.addListener(marker,'click', (function(marker,content,infowindow){
         return function() {

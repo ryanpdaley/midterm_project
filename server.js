@@ -238,6 +238,7 @@ app.get("/user/point/:id/delete", (req, res) => {
       } else {
         console.log(result[0]);
         const user_id = result[0].user_id;
+        const list_id = result[0].list_id;
         if (user_id !== req.session.google_id) {
           console.log("Not the same user who created the list");
           res.status(403).redirect("/");
@@ -247,7 +248,7 @@ app.get("/user/point/:id/delete", (req, res) => {
               console.log(error);
             } else {
               console.log("Point deleted");
-              res.redirect(`/user/list/`);
+              res.redirect(`/user/list/${list_id}`);
             }
           })
         }
