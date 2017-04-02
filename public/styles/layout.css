@@ -44,8 +44,6 @@ form {
      border:none;
      padding:0!important;
      font: inherit;
-     /*border is optional*/
-    /* border-bottom:1px solid #444;*/
      cursor: pointer;
 }
 
@@ -54,6 +52,21 @@ form {
     margin: 32px 20px 0 20px;
     font-size: x-large;
     color: #ddd;
+    border-bottom:1px solid;
+}
+
+.listLinkButton {
+  color: #337ab7;
+  text-decoration: none;
+}
+
+.listLinkButton:hover {
+    border-bottom:1px solid;
+}
+
+.listItemText {
+margin-top: 20px;
+    margin-bottom: 10px;
 }
 
 #sign_out {
@@ -95,7 +108,7 @@ form {
 
 .listHeader {
   width:60%;
-  margin: 10px auto;
+  float: left;
 }
 
 .left {
