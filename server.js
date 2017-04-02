@@ -163,8 +163,9 @@ app.get("/user/list/:id/delete", (req, res) => {
     console.log("User not signed in");
     res.redirect("/");
   } else {
-    knex("point").select().where("list_id", "=", req.params.id).asCallback((error, result) => {
+    knex("list").select().where("id", "=", req.params.id).asCallback((error, result) => {
       console.log(req.params.id);
+      console.log(result)
       if (error) {
         console.log(error)
       } else {
