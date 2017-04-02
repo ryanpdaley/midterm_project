@@ -60,8 +60,24 @@ form {
   padding: 20px 0;
 }
 
-.showLists {
-  padding: 20px;
+.lists {
+  padding: 0 20px;
+  border-style: solid;
+  width: 60%;
+  margin: 10px auto;
+  border-radius: 7px;
+  background-color: #ffffff;
+}
+
+.listTable{
+  width:60%;
+  margin: 10px auto;
+
+}
+
+.listHeader {
+  width:60%;
+  margin: 10px auto;
 }
 
 .left {

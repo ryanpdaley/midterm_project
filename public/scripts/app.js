@@ -22,6 +22,7 @@ $( document ).ready(function() {
     $("#overlay").show();
     $("#overlay").css("opacity", "0.9");
     $("#favourites_view").css("display", "none");
+    $(".right").css("float", "left");
     $("#myLists_view").css("display", "none");
     $("#addList_view").show();
     $("#addList_view").css("opacity", "1");
@@ -53,6 +54,7 @@ $( document ).ready(function() {
   $("#overlay_close").click(function(ev) {
     ev.preventDefault();
     $("#overlay").hide();
+    $(".right").css("float", "right");
   });
 
   //  Sign-in button hover state logic
