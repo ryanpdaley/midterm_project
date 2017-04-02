@@ -1,3 +1,4 @@
+
 <input type="hidden" id="list_id" value="<%= list_id %>">
 <div id="map"></div>
 
@@ -22,7 +23,18 @@
         map: map
       });
 
-      var content = `<h2>${data[key].title}</h2><h3>${data[key].address}</h3><img src='${data[key].img_url}'><p>${data[key].desc}</p>`;
+      // var content = `<h2>${data[key].title}</h2><h3>${data[key].address}</h3><img src='${data[key].img_url}'><p>${data[key].desc}</p>`;
+
+
+      var content = `<link href="../styles/custom.css" rel="stylesheet" type="text/css">` +
+    `<div id="iw-container">` +
+    `<div class="iw-title">${data[key].title}</div>` +
+    `<div class="iw-content">` +
+    `<div class="iw-subTitle">${data[key].address}</div>` +
+    `<img src="${data[key].img_url}" height="80" width="80">` +
+    `<p>${data[key].desc}</p>` +
+    `<div class="iw-bottom-gradient"></div>` +
+    `</div>`;
 
       var infowindow = new google.maps.InfoWindow();
 
