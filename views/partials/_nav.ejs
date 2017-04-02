@@ -2,6 +2,7 @@
   <a href='/'><img id="logo" src="/assets/golf-flag.png"></a>
   <div class="appName"><a href='/'>mpprThng</a></div>
   <% console.log(user) %>
+  <button class='linkButton backButton' onclick="goBack()"><span class="glyphicon glyphicon-chevron-left"></span>Back</button>
   <% if (user === 0) {%>
     <meta name="google-signin-client_id" content="911270238954-irt7ibeipgghv1iev0ie11revr4buk03.apps.googleusercontent.com">
     <script src="https://apis.google.com/js/api.js"></script>
@@ -12,4 +13,10 @@
       <button type="button" id="sign_in">Sign In</button>
     </form>
   <%}%>
+
+<script>
+function goBack() {
+    window.history.back();
+}
+</script>
 </nav>

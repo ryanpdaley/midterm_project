@@ -1,19 +1,3 @@
-//  Draws the inital map centered on LHL
-function initalMap() {
-
-  var location = new google.maps.LatLng(43.64443, -79.39483);
-
-  var mapCanvas = document.getElementById('map');
-  var mapOptions = {
-      center: location,
-      zoom: 16,
-      panControl: false,
-      mapTypeId: google.maps.MapTypeId.ROADMAP,
-      disableDefaultUI: true
-  }
-  var map = new google.maps.Map(mapCanvas, mapOptions);
-}
-
 $( document ).ready(function() {
 
   //  Show the overlay and the addList partial when clicked
@@ -28,28 +12,6 @@ $( document ).ready(function() {
     $("#addList_view").css("opacity", "1");
   });
 
-  //  Show the overlay and the myLists partial when clicked
-  // $("#myLists").click(function(ev) {
-  //   ev.preventDefault();
-  //   $("#overlay").show();
-  //   $("#overlay").css("opacity", "0.9");
-  //   $("#favourites_view").css("display", "none");
-  //   $("#addList_view").css("display", "none");
-  //   $("#myLists_view").show();
-  //   $("#myLists_view").css("opacity", "1");
-  // });
-
-  //  Show the overlay and the favourites partial when clicked
-  // $("#favourites").click(function(ev) {
-  //   ev.preventDefault();
-  //   $("#overlay").show();
-  //   $("#overlay").css("opacity", "0.9");
-  //   $("#addList_view").css("display", "none");
-  //   $("#myLists_view").css("display", "none");
-  //   $("#favourites_view").show();
-  //   $("#favourites_view").css("opacity", "1");
-  // });
-
   // Close / hide the overlay
   $("#overlay_close").click(function(ev) {
     ev.preventDefault();
@@ -58,7 +20,7 @@ $( document ).ready(function() {
   });
 
   //  Sign-in button hover state logic
-  $( ".sign_in" ).hover(function() {
+  $( "#sign_in" ).hover(function() {
     $(this).css("opacity", "1");
   }, function() {
     $(this).css("opacity", "0.5");
