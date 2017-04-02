@@ -9,9 +9,7 @@
         <tr>
           <th><a href="/user/list/<%= list[key].id%>"><h3>- <%= list[key].name %> </h3></a></th>
           <th>
-            <form action="" method="post">
-              <button type="submit">Delete</button>
-            </form>
+            <a href="/user/list/<%= list[key].id %>/Delete">Delete</a>
           </th>
           <th>
           <% if (list[key].isfav) { %>
