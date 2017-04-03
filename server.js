@@ -5,7 +5,7 @@ let all_maps = {};
 
 require('dotenv').config();
 
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 5000; //Change to 5000 for Heroku
 const ENV = process.env.ENV || "production"; //Change to production before deployment
 const express = require("express");
 const bodyParser = require("body-parser");
