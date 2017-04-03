@@ -1,39 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home Page</title>
-
-    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
-    <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
-    <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
-
-    <meta name="google-signin-client_id" content="911270238954-irt7ibeipgghv1iev0ie11revr4buk03.apps.googleusercontent.com">
-    <script src="https://apis.google.com/js/api.js"></script>
-
-    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
-    <script type="text/javascript" src="/scripts/app.js"></script>
-  </head>
-  <body>
-    <h1>Hello World!</h1>
-
-    <form action="/sign-in" method="post">
-      <input type="hidden" name="id_token" value="">
-      <button type="button" id="sign_in" style="background-color: pink">Google Sign In</button>
-    </form>
-
-    <form action="/sign-out" method="post">
-      <button type="button" id="sign_out">Sign Out Google</button>
-    </form>
-
-    <a href="/logout">Sign OUt APP</a>
-
-
-    <ol>
-      <% for (let key in lists) {%>
-      <li><a href="/map/<%= lists[key].id %>"><%= lists[key].name %></a></li>
-      <% }%>
-    </ol>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="/scripts/sign-in.js"></script>
-  </body>
+<html>
+    <% include partials/_head %>
+    <body>
+      <% include partials/_nav %>
+      <content>
+        <div class="container">
+          <% include partials/_map %>
+          <% include partials/_sub_nav %>
+        </div>
+        <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <script src="/scripts/app.js"></script>
+    </content>
+    </body>
 </html>

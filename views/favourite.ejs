@@ -1,6 +1,19 @@
-<h1>My Favourite Lists</h1>
-<ol>
+<% include partials/_head %>
+<% include partials/_nav %>
+<div class='lists'>
+  <div class='listHeader'>
+    <h2>My Favourite Lists:</h2>
+  </div>
+  <table class='listTable'>
+    <tr><th style="width:50%"></th><th style="width:50%"></th></tr>
     <% for (let key in maps) {%>
-    <li><a href="/map/<%= maps[key].list_id %>"><%= maps[key].name%></a></li>
+    <tr>
+    <th><a href="/map/<%= maps[key].list_id %>">- <%= maps[key].name%></a></th>
+    <th><form action="/map/<%= maps[key].list_id %>/unlike" method="post">
+    <button type="submit">UnFavourite!</button>
+    </form></th>
+    </tr>
     <% }%>
-</ol>
+  </table>
+</div>
+

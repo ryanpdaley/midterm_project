@@ -1,6 +1,20 @@
-<ol>
+<% include partials/_head %>
+<% include partials/_nav %>
+<div class='lists'>
+  <div class='listHeader'>
+    <h2>Points of Interest:</h2>
+  </div>
+  <table class='listTable'>
+    <tr><th style="width:15%"></th><th style="width:65%"></th><th style="width:20%"></th></tr>
     <% for (let key in points) {%>
-    <li><a href="/user/point/<%= points[key].id %>"><%= points[key].title%></a></li>
+      <tr>
+        <td><a href="/user/point/<%= points[key].id %>"><%= points[key].title%></a></td>
+        <td><%= points[key].address%></a></td>
+        <td>
+            <a href="/user/point/<%= points[key].id %>/delete">Delete Point</a>
+          </td>
+      </tr>
     <% }%>
-</ol>
-<a href="/user/list/<%= list_id %>/create">Create point of interest</a>
+  </table>
+</div>
+<a href="/user/list/<%= list_id %>/create" style='text-align: center;'><h2>Add a Point<h2></a>

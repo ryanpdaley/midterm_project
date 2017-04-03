@@ -1,6 +1,29 @@
-<ol>
-    <% for(let key in list) {%>
-    <li><a href="/user/list/<%= list[key].id%>"><%= list[key].name%></a></li>
-    <% }%>
-</ol>
-<a href="/user/list/create">Create new list</a>
+<% include partials/_head %>
+<% include partials/_nav %>
+<div class='lists'>
+  <div class='listHeader'>
+    <h2>My Lists:</h2>
+  </div>
+  <table class='listTable'>
+      <tr><th style="width:40%"></th><th style="width:20%"></th><th style="width:40%"></th></tr>
+      <% for(let key in list) {%>
+        <tr>
+          <td><a href="/user/list/<%= list[key].id%>">- <%= list[key].name %></a></td>
+          <td>
+            <a href="/user/list/<%= list[key].id %>/delete">Delete Me</a>
+          </td>
+          <td>
+          <% if (list[key].isfav) { %>
+            <form action="/map/<%= list[key].id %>/unlike" method="post">
+              <button type="submit">UnFavourite Me!</button>
+            </form>
+          <% } else { %>
+            <form action="/map/<%= list[key].id %>/like" method="post">
+              <button type="submit">Favourite Me!</button>
+            </form>
+          <% } %>
+          </td>
+        </tr>
+      <% }%>
+  </table>
+</div>
