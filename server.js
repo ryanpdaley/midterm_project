@@ -500,6 +500,6 @@ app.post("/sign-in", (req, res) => {
   }
 });
 
-app.listen(PORT, () => {
+app.listen(PORT || 5000, () => {
   console.log("Example app listening on port " + PORT);
 });

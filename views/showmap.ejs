@@ -1,5 +1,22 @@
+<% if (isSignedIn && !liked){ %>
+<form action="/map/<%= list_id %>/like" method="post">
+    <button type="submit">Like this map</button>
+</form>
+<% } %>
+<% if (isSignedIn && liked){ %>
+<form action="/map/<%= list_id %>/unlike" method="post">
+    <button type="submit">unlike this map</button>
+</form>
+<% } %>
+
 <input type="hidden" id="list_id" value="<%= list_id %>">
-<link href='/styles/layout.css' rel='stylesheet' type='text/css'>
+
+<style>
+    #map {
+        height: 400px;
+        width: 100%;
+    }
+</style>
 <div id="map"></div>
 
 
@@ -12,26 +29,26 @@
 
     var map = new google.maps.Map(document.getElementById('map'), {
       zoom: 11,
-      center: {lat: 43.644087, lng: -79.387014},
-      disableDefaultUI: true
+      center: {lat: 43.644087, lng: -79.387014}
     });
 
 
     for (let key in data) {
-      let marker = new google.maps.Marker({
+      const marker = new google.maps.Marker({
         position: {lat: Number(data[key].lat), lng: Number(data[key].long)},
         map: map
       });
 
-      let content = `<h2>${data[key].title}</h2><h3>${data[key].address}</h3><img src='${data[key].img_url}'><p>${data[key].desc}</p>`;
+      var content = `<h2>${data[key].title}</h2><h3>${data[key].address}</h3><img src='${data[key].img_url}'><p>${data[key].desc}</p>`;
 
-      let infowindow = new google.maps.InfoWindow({
-        content: content
-      });
+      var infowindow = new google.maps.InfoWindow();
 
-      marker.addListener('click', function() {
-        infowindow.open(map, marker);
-      });
+      google.maps.event.addListener(marker,'click', (function(marker,content,infowindow){
+        return function() {
+          infowindow.setContent(content);
+          infowindow.open(map,marker);
+        };
+      })(marker,content,infowindow));
     }
   });
 
