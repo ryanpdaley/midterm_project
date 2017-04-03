@@ -16,13 +16,27 @@ const knexLogger  = require('knex-logger');
 const request = require('request');
 const cookieSession = require('cookie-session');
 
-knex("favourite").select("name", "list_id").join("list", "list.id", "=", "favourite.list_id").where({
-  "favourite.user_id": "101009559760674447488",
-}).asCallback((error, result)=>{
-  if (error) {
-    console.log(error);
-  } else {
-    console.log(result);
+var counter = function() {
+  var privateCounter = 0;
+  function changeBy(val) {
+    privateCounter += val;
   }
-})
+  return {
+    increment: function() {
+      changeBy(1);
+    },
+    decrement: function() {
+      changeBy(-1);
+    },
+    value: function() {
+      return privateCounter;
+    }
+  };
+};
 
+console.log(counter().value()); // logs 0
+counter().increment();
+counter().increment();
+console().log(counter().value()); // logs 2
+counter().decrement();
+console.log(counter().value()); // logs 1
